@@ -245,6 +245,14 @@ Resources:
             Principal:
               Service:
                 - ec2.amazonaws.com
+          - Action:
+              - 'sts:AssumeRole'
+            Effect: Allow
+            Principal:
+              AWS: !Join
+                - ''
+                - - 'arn:aws:iam::{{.Cluster.InfrastructureAccount | getAWSAccountID}}:role/'
+                  - !Ref MasterIAMRole
         Version: 2012-10-17
       Path: /
       Policies:
@@ -895,6 +903,14 @@ Resources:
                 - ''
                 - - 'arn:aws:iam::{{.Cluster.InfrastructureAccount | getAWSAccountID}}:role/'
                   - !Ref MasterIAMRole
+          - Action:
+              - 'sts:AssumeRole'
+            Effect: Allow
+            Principal:
+              AWS: !Join
+                - ''
+                - - 'arn:aws:iam::{{.Cluster.InfrastructureAccount | getAWSAccountID}}:role/'
+                  - !Ref WorkerIAMRole
         Version: 2012-10-17
       Path: /
       Policies:
