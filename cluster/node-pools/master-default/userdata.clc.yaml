@@ -472,6 +472,11 @@ storage:
               - --validate-application-label-min-creation-time={{ .Cluster.ConfigItems.teapot_admission_controller_application_min_creation_time }}
               - --application-registry-url=http://127.0.0.1:8285/
 {{- end }}
+              - --pod-inject-environment-variables
+              - --pod-environment-variable=_PLATFORM_ACCOUNT={{ .Cluster.Alias }}
+              - --pod-environment-variable=_PLATFORM_OPENTRACING_TAG_ACCOUNT={{ .Cluster.Alias }}
+              - --pod-environment-variable=_PLATFORM_OPENTRACING_LIGHTSTEP_COLLECTOR_PORT=8443
+              - --pod-environment-variable=_PLATFORM_OPENTRACING_LIGHTSTEP_COLLECTOR_HOST=tracing.stups.zalan.do
             ports:
               - containerPort: 8085
             volumeMounts:
