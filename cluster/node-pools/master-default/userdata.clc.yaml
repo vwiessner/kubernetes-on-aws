@@ -455,6 +455,7 @@ storage:
                 memory: 100Mi
             args:
               - --address=:8085
+              - --master=http://127.0.0.1:8080
               - --tls-cert-file=/etc/kubernetes/ssl/admission-controller.pem
               - --tls-key-file=/etc/kubernetes/ssl/admission-controller-key.pem
               - --pod-default-cpu-request={{ .Cluster.ConfigItems.teapot_admission_controller_default_cpu_request }}
@@ -474,9 +475,12 @@ storage:
 {{- end }}
               - --pod-inject-environment-variables
               - --pod-environment-variable=_PLATFORM_ACCOUNT={{ .Cluster.Alias }}
+              - --pod-environment-variable=_PLATFORM_TOKENINFO_URL={{ .ConfigItems.tokeninfo_url }}
+
               - --pod-environment-variable=_PLATFORM_OPENTRACING_TAG_ACCOUNT={{ .Cluster.Alias }}
               - --pod-environment-variable=_PLATFORM_OPENTRACING_LIGHTSTEP_COLLECTOR_PORT=8443
               - --pod-environment-variable=_PLATFORM_OPENTRACING_LIGHTSTEP_COLLECTOR_HOST=tracing.stups.zalan.do
+              - --pod-environment-variable=_PLATFORM_OPENTRACING_LIGHTSTEP_ACCESS_TOKEN={{ .ConfigItems.lightstep_token }}
             ports:
               - containerPort: 8085
             volumeMounts:
