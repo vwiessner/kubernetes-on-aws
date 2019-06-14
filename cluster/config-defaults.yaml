@@ -238,4 +238,4 @@ node_max_pods: "110" # Default: 110
 node_cidr_mask_size: "24" # Default: 24
 
 # when set to true, routes external traffic to the apiserver through a skipper sidecar
-apiserver_proxy: "false"
+apiserver_proxy: "true"
