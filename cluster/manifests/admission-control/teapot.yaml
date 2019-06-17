@@ -11,7 +11,7 @@ webhooks:
       caBundle: "{{ .ConfigItems.ca_cert_decompressed }}"
     failurePolicy: Fail
     rules:
-      - operations: [ "CREATE" ]
+      - operations: [ "CREATE", "UPDATE" ]
         apiGroups: [""]
         apiVersions: ["v1"]
         resources: ["pods"]
